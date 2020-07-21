@@ -2,19 +2,30 @@
 import React, { Component } from 'react';
 import Directory from './DirectoryComponent';
 import { ENTREES } from '../shared/mainEntrees';
+import MainEntreeInfo from './MainEntreesComponent';
+import { View } from 'react-native';
 
 class Main extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            entrees: ENTREES
+            entrees: ENTREES,
+            selectedEntree: null
         };
+    }
+
+    onEntreeSelect(entreeId) {
+        this.setState({selectedEntree: entreeId});
     }
 
     render() {
         return(
-            <Directory entrees={this.state.entrees} />
+            <View style={{flex: 1}}>
+                <Directory entrees={this.state.entrees} onPress={entreeId => this.onEntreeSelect(entreeId)} />
+                <MainEntreeInfo entree={this.state.entrees.filter(entree => entree.id === this.state.selectedEntree)[0]} />
+            </View>
+            
         );
     }
 }

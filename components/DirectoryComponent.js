@@ -1,15 +1,16 @@
 //This component will render the main entrees
 import React from 'react';
-import { FlatList } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { FlatList, View, Text, Image } from 'react-native';
+import { ListItem, Card, Button, Icon } from 'react-native-elements';
 
 function Directory(props) {
 
-    const renderMainEntreeItem = ({item}) => {
+    const renderItem = ({item}) => {
         return(
             <ListItem
                 title={item.name}
                 subtitle={item.description}
+                onPress={() => props.onPress(item.id)}
                 leftAvatar={{source: require('./images/beef-bulgogi.jpg')}}
             />
         );
@@ -18,9 +19,9 @@ function Directory(props) {
     return(
         <FlatList
             data={props.entrees}
-            renderItem={renderMainEntreeItem}
+            renderItem={renderItem}
             keyExtractor={item => item.id.toString()}
-        />
+        />        
     )
 }
 
