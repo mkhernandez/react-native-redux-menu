@@ -1,9 +1,11 @@
 //This component will render the Main Entrees Page
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
+import { ENTREES } from '../shared/mainEntrees';
 
 function RenderMainEntree({entree}) {
+
     if(entree) {
         return(
             <Card
@@ -18,8 +20,25 @@ function RenderMainEntree({entree}) {
     return <View />;
 }
 
-function MainEntreeInfo(props) {
-    return <RenderMainEntree entree={props.entree} />;
+class MainEntreeInfo extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            entrees: ENTREES
+        };
+    }
+
+    static navigationOptions = {
+        title: 'Entree Item'
+    };
+
+    render() {
+        const entreeId = this.props.navigation.getParam('entreeId');
+        const entree = this.state.entrees.filter(entree => entree.id === entreeId)[0];
+        return <RenderMainEntree entree={entree} />;
+    }
+    
 }
 
 export default MainEntreeInfo;

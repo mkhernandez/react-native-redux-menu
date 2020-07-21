@@ -1,28 +1,44 @@
 //This component will render the main entrees
-import React from 'react';
-import { FlatList, View, Text, Image } from 'react-native';
-import { ListItem, Card, Button, Icon } from 'react-native-elements';
+import React, { Component } from 'react';
+import { FlatList } from 'react-native';
+import { ListItem } from 'react-native-elements';
+import { ENTREES } from '../shared/mainEntrees';
 
-function Directory(props) {
+class Directory extends Component {
+    constructor(props) {
+        super(props);
 
-    const renderItem = ({item}) => {
+        this.state = {
+            entrees: ENTREES
+        };
+    }
+
+    static navigationOptions = {
+        title: 'Main Entrees'
+    }
+
+    render() {
+        const { navigate } = this.props.navigation;
+        const renderDirectoryItem = ({item}) => {
+            return(
+                <ListItem
+                    title={item.name}
+                    subtitle={item.description}
+                    onPress={() => navigate('EntreeInfo', {entreeId: item.id})}
+                    leftAvatar={{source: require('./images/beef-bulgogi.jpg')}}
+                />  
+            );
+        };
+    
         return(
-            <ListItem
-                title={item.name}
-                subtitle={item.description}
-                onPress={() => props.onPress(item.id)}
-                leftAvatar={{source: require('./images/beef-bulgogi.jpg')}}
-            />
+            <FlatList
+                data={this.state.entrees}
+                renderItem={renderDirectoryItem}
+                keyExtractor={item => item.id.toString()}
+            />        
         );
-    };
-
-    return(
-        <FlatList
-            data={props.entrees}
-            renderItem={renderItem}
-            keyExtractor={item => item.id.toString()}
-        />        
-    )
+    }
+    
 }
 
 export default Directory;

@@ -1,9 +1,30 @@
 //This component will be the main point of control for the state 
 import React, { Component } from 'react';
+
 import Directory from './DirectoryComponent';
 import { ENTREES } from '../shared/mainEntrees';
 import MainEntreeInfo from './MainEntreesComponent';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+
+const DirectoryNavigator = createStackNavigator(
+    {
+        Directory: { screen: Directory },
+        EntreeInfo: { screen: MainEntreeInfo }
+    },
+    {
+        initialRouteName: 'Directory',
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5637DD'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
+    }
+);
 
 class Main extends Component {
     constructor(props) {
@@ -21,9 +42,8 @@ class Main extends Component {
 
     render() {
         return(
-            <View style={{flex: 1}}>
-                <Directory entrees={this.state.entrees} onPress={entreeId => this.onEntreeSelect(entreeId)} />
-                <MainEntreeInfo entree={this.state.entrees.filter(entree => entree.id === this.state.selectedEntree)[0]} />
+            <View style={{flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Expo.Constants.statusBarHeight }}>
+                <DirectoryNavigator />
             </View>
             
         );
