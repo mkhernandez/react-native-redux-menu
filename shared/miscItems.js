@@ -1,4 +1,4 @@
-export const miscItems = [
+export const MISCITEMS = [
     {
         id: 0,
         name: "Japchae",
