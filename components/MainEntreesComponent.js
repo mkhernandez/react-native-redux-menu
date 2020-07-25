@@ -30,7 +30,12 @@ class MainEntreeInfo extends Component {
     }
 
     static navigationOptions = {
-        title: 'Entree Item'
+        title: 'Entree Item',
+        headerTitleStyle: { //To center the title 
+            textAlign:"center", 
+            flex: 1
+        },
+        headerRight: (<View />) //This is to get the title to center since there is back arrow on the left hand side
     };
 
     render() {

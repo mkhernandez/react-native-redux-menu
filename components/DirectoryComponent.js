@@ -14,7 +14,11 @@ class Directory extends Component {
     }
 
     static navigationOptions = {
-        title: 'Main Entrees'
+        title: 'Main Entrees',
+        headerTitleStyle: { //To center the title 
+            textAlign:"center", 
+            flex: 1
+        }
     }
 
     render() {

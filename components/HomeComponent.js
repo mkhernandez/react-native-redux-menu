@@ -38,7 +38,11 @@ class Home extends Component {
     }
 
     static navigationOptions = {
-        title: 'Heart & Seoul'
+        title: 'Heart & Seoul',
+        headerTitleStyle: { 
+            textAlign:"center", 
+            flex:1 
+        }
     }
 
     render() {
