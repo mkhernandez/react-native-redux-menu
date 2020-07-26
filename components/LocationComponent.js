@@ -1,5 +1,5 @@
 import React,  { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 class Location extends Component {
 
@@ -8,7 +8,8 @@ class Location extends Component {
         headerTitleStyle: { //To center the title 
             textAlign:"center", 
             flex: 1
-        }
+        },
+        headerRight: (<View />) //This is to get the title to center since there is back arrow on the left hand side
     }
 
     render() {

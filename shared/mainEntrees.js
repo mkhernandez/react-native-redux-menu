@@ -1,3 +1,5 @@
+import { LogBox } from "react-native";
+
 export const ENTREES = [
     {
         id: 0,
@@ -26,6 +28,13 @@ export const ENTREES = [
         image: "/assets/images/la-galbi.jpg",
         featured: false,
         description: "Beef short ribs marinated in our own sauce and grilled."
+    },
+    {
+        id: 4,
+        name: "logo",
+        image: "/assets/images/logo.png",
+        featured: false,
+        description: "logo"
     }
    
 ];

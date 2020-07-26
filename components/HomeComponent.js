@@ -42,7 +42,8 @@ class Home extends Component {
         headerTitleStyle: { 
             textAlign:"center", 
             flex:1 
-        }
+        },
+        headerRight: (<View />) //This is to get the title to center since there is back arrow on the left hand side
     }
 
     render() {

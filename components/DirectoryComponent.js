@@ -1,10 +1,10 @@
 //This component will render the main entrees
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { ENTREES } from '../shared/mainEntrees';
 
-class Directory extends Component {
+class Menu extends Component {
     constructor(props) {
         super(props);
 
@@ -18,7 +18,8 @@ class Directory extends Component {
         headerTitleStyle: { //To center the title 
             textAlign:"center", 
             flex: 1
-        }
+        },
+        headerRight: (<View />) //This is to get the title to center since there is back arrow on the left hand side
     }
 
     render() {
@@ -45,4 +46,4 @@ class Directory extends Component {
     
 }
 
-export default Directory;
+export default Menu;

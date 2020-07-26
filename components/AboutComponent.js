@@ -1,5 +1,5 @@
 import React,  { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
 
 function Mission() {
@@ -50,7 +50,8 @@ class About extends Component {
         headerTitleStyle: { //To center the title 
             textAlign:"center", 
             flex: 1
-        }
+        },
+        headerRight: (<View />) //This is to get the title to center since there is back arrow on the left hand side
     }
 
     render() {

@@ -1,22 +1,34 @@
 //This component will be the main point of control for the state 
 import React, { Component } from 'react';
 import Home from './HomeComponent';
-import Directory from './DirectoryComponent';
+import Menu from './DirectoryComponent';
 import MainEntreeInfo from './MainEntreesComponent';
 import Location from './LocationComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
 import { ENTREES } from '../shared/mainEntrees';
-import { View, Platform } from 'react-native';
-import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import { View, Platform, StyleSheet, Text, ScrollView, Image } from 'react-native';
+import { createStackNavigator, createDrawerNavigator, DrawerItems } from 'react-navigation';
+import { Icon } from 'react-native-elements';
+import SafeAreaView from 'react-native-safe-area-view';
 
 const DirectoryNavigator = createStackNavigator(
     {
-        Directory: { screen: Directory },
+        Menu: { 
+            screen: Menu,
+        navigationOptions: ({navigation}) => ({
+            headerLeft: <Icon
+                name='list'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
+    },
         EntreeInfo: { screen: MainEntreeInfo }
     },
     {
-        initialRouteName: 'Directory',
+        initialRouteName: 'Menu',
         navigationOptions: {
             headerStyle: {
                 backgroundColor: '#5637DD'
@@ -34,15 +46,21 @@ const HomeNavigator = createStackNavigator(
         Home: { screen: Home }
     },
     {
-        navigationOptions: {
+        navigationOptions: ({navigation}) =>  ({
             headerStyle: {
                 backgroundColor: '#5637DD'
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
                 color: '#fff'
-            }
-        }
+            },
+            headerLeft: <Icon
+                name='home'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}    
+            />
+        })
     }
 );
 const LocationNavigator = createStackNavigator(
@@ -50,15 +68,21 @@ const LocationNavigator = createStackNavigator(
         Location: { screen: Location }
     },
     {
-        navigationOptions: {
+        navigationOptions: ({navigation}) => ({
             headerStyle: {
                 backgroundColor: '#5637DD'
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
                 color: '#fff'
-            }
-        }
+            },
+            headerLeft: <Icon
+                name='map'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}    
+            />
+        })
     }
 );
 const AboutNavigator = createStackNavigator(
@@ -66,15 +90,21 @@ const AboutNavigator = createStackNavigator(
         About: { screen: About }
     },
     {
-        navigationOptions: {
+        navigationOptions: ({navigation}) => ({
             headerStyle: {
                 backgroundColor: '#5637DD'
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
                 color: '#fff'
-            }
-        }
+            },
+            headerLeft: <Icon
+                name='info-circle'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
     }
 );
 const ContactNavigator = createStackNavigator(
@@ -82,28 +112,113 @@ const ContactNavigator = createStackNavigator(
         Contact: { screen: Contact }
     },
     {
-        navigationOptions: {
+        navigationOptions: ({navigation}) => ({
             headerStyle: {
                 backgroundColor: '#5637DD'
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
                 color: '#fff'
-            }
-        }
+            },
+            headerLeft: <Icon
+                name='address-card'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}    
+            />
+        })
     }
+);
+
+const CustomDrawerContentComponent = props => (
+    <ScrollView>
+        <SafeAreaView style={styles.container} forceInset={{top: 'always', horizontal: 'never'}}>
+            <View style={styles.drawerHeader}>
+                <View style={{flex: 1}}>
+                    <Image style={styles.tinyLogo} source={require('./images/logo.png')}/>
+                </View>
+                <View style={{flex: 2}}>
+                    <Text style={styles.drawerHeaderText}>Heart &amp; Seoul</Text>
+                </View>
+            </View>
+            <DrawerItems {...props} />
+        </SafeAreaView>
+    </ScrollView>
 );
 
 const MainNavigator = createDrawerNavigator(
     {
-        Home: { screen: HomeNavigator },
-        Directory: { screen: DirectoryNavigator },
-        Location: { screen: LocationNavigator },
-        About: { screen: AboutNavigator },
-        Contact: { screen: ContactNavigator }
+        Home: {
+            screen: HomeNavigator,
+        navigationOptions: {
+            drawerIcon: ({tintColor}) => (
+                <Icon
+                    name='home'
+                    type='font-awesome'
+                    size={24}
+                    color={tintColor}
+                />
+            )
+        }
+     },
+        Menu: { 
+            screen: DirectoryNavigator,
+            navigationOptions: {
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='list'
+                        type='font-awesome'
+                        size={24}
+                        color={tintColor}
+                    />
+                )
+            }
+         },
+        Location: { 
+            screen: LocationNavigator,
+            navigationOptions: {
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='map'
+                        type='font-awesome'
+                        size={24}
+                        color={tintColor}
+                    />
+                )
+            }
+        },
+        About: { 
+            screen: AboutNavigator,
+            navigationOptions: {
+                drawerLabel: 'About Us',
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='info-circle'
+                        type='font-awesome'
+                        size={24}
+                        color={tintColor}
+                    />
+                )
+            }
+        },
+        Contact: { 
+            screen: ContactNavigator,
+            navigationOptions: {
+                drawerLabel: 'Contact Us',
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='address-card'
+                        type='font-awesome'
+                        size={24}
+                        color={tintColor}
+                    />
+                )
+            }
+        }
     },
     {
-        drawerBackgroundColor: '#CEC8FF'
+        drawerBackgroundColor: '#f2f3f5',
+        contentComponent: CustomDrawerContentComponent
     }
 );
 
@@ -130,5 +245,40 @@ class Main extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    drawerHeader: {
+        backgroundColor: '#5637DD',
+        height: 140,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        flexDirection: 'row'
+    },
+    drawerHeaderText: {
+        color: '#fff',
+        fontSize: 24,
+        fontWeight: 'bold'
+    },
+    drawerImage: {
+        margin: 10,
+        height: 60,
+        width: 60
+    },
+    stackIcon: {
+        marginLeft: 10,
+        color: '#fff',
+        fontSize: 24
+    },
+    tinyLogo: {
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        marginLeft: 20
+    }
+});
 
 export default Main;
