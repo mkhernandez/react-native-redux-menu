@@ -1,4 +1,4 @@
-export const BIBIMBAP = [
+export const BIBIMBAPS = [
     {
         id: 0,
         name: "Beef Bibimbap",

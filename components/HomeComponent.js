@@ -2,10 +2,24 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import { ENTREES }  from '../shared/mainEntrees';
-import { BIBIMBAP } from '../shared/bibimbap';
+import { BIBIMBAPS } from '../shared/bibimbap';
 import { STEWS } from '../shared/stews';
 import { MISCITEMS } from '../shared/miscItems';
 import { SIDES } from '../shared/sideDishes';
+
+function Info() {
+
+    return(
+        <Card title='Welcome' image={require('./images/restaurant-home.jpg')}>
+            <Text>
+                Welcome to Heart &amp; Seoul! We take pride in serving some of the best cuisine in the world.
+                We are located minutes from the Riverwalk in downtown San Antonio. Come in and enjoy 
+                the experience of grilling your meats to your liking with all the side dishes you want.
+                If grilling is not your thing then let us know and we will cook for you. 
+            </Text>
+        </Card>
+    );
+}
 
 function RenderItem({item}) {
     if(item) {
@@ -30,7 +44,7 @@ class Home extends Component {
 
         this.state = {
             entrees: ENTREES,
-            bibimbap: BIBIMBAP,
+            bibimbaps: BIBIMBAPS,
             stews: STEWS,
             miscItems: MISCITEMS,
             sides: SIDES
@@ -49,10 +63,11 @@ class Home extends Component {
     render() {
         return(
             <ScrollView>
+                <Info />
                 <RenderItem
                     item={this.state.entrees.filter(entrees => entrees.featured)[0]} />
                 <RenderItem
-                    item={this.state.bibimbap.filter(bibimbap => bibimbap.featured)[0]} />
+                    item={this.state.bibimbaps.filter(bibimbaps => bibimbaps.featured)[0]} />
                 <RenderItem
                     item={this.state.stews.filter(stews => stews.featured)[0]} />
                 <RenderItem

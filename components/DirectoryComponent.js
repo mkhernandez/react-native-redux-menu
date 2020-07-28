@@ -14,7 +14,7 @@ class Menu extends Component {
     }
 
     static navigationOptions = {
-        title: 'Main Entrees',
+        title: 'Menu',
         headerTitleStyle: { //To center the title 
             textAlign:"center", 
             flex: 1

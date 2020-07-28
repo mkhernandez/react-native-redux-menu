@@ -35,6 +35,13 @@ export const ENTREES = [
         image: "/assets/images/logo.png",
         featured: false,
         description: "logo"
+    },
+    {
+        id: 5,
+        name: "restaurant home image",
+        image: "/assets/images/restaurant-home.jpg",
+        featured: false,
+        description: "Image of restaurant"
     }
    
 ];
