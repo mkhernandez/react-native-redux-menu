@@ -32,7 +32,7 @@ export const entreesLoading = () => ({
     type: ActionTypes.ENTREES_LOADING
 });
 
-export const entreesFailed = (errMess) => ({
+export const entreesFailed = errMess => ({
     type: ActionTypes.ENTREES_FAILED,
     payload: errMess
 });
@@ -66,10 +66,10 @@ export const addBibimbaps = (bibimbaps) => ({
 });
 
 export const bibimbapsLoading = () => ({
-    type: ActionTypes.bibimbapsLoading
+    type: ActionTypes.BIBIMBAPS_LOADING
 });
 
-export const bibimbapsFailed = (errMess) => ({
+export const bibimbapsFailed = errMess => ({
     type: ActionTypes.BIBIMBAPS_FAILED,
     payload: errMess
 });
@@ -106,7 +106,7 @@ export const stewsLoading = () => ({
     type: ActionTypes.STEWS_LOADING
 });
 
-export const stewsFailed = (errMess) => ({
+export const stewsFailed = errMess => ({
     type: ActionTypes.STEWS_FAILED,
     payload: errMess
 });
@@ -143,7 +143,7 @@ export const miscItemsLoading = () => ({
     type: ActionTypes.MISCITEMS_LOADING
 });
 
-export const miscItemsFailed = (errMess) =>({
+export const miscItemsFailed = errMess =>({
     type: ActionTypes.MISCITEMS_FAILED,
     payload: errMess
 });
@@ -180,7 +180,7 @@ export const sidesLoading = () => ({
     type: ActionTypes.SIDES_LOADING
 });
 
-export const sidesFailed = (errMess) => ({
+export const sidesFailed = errMess => ({
     type: ActionTypes.SIDES_FAILED,
     payload: errMess
 });

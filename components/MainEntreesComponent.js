@@ -2,7 +2,14 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
-import { ENTREES } from '../shared/mainEntrees';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+
+const mapStateToProps = state => {
+    return {
+        entrees: state.entrees
+    };
+}
 
 function RenderMainEntree({entree}) {
 
@@ -10,7 +17,7 @@ function RenderMainEntree({entree}) {
         return(
             <Card
                 title={entree.name}
-                image={require('./images/la-galbi.jpg')}>
+                image={{uri: baseUrl + entree.image}}>
                 <Text style={{margin: 10}}>
                     {entree.description}
                 </Text>
@@ -21,13 +28,6 @@ function RenderMainEntree({entree}) {
 }
 
 class MainEntreeInfo extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            entrees: ENTREES
-        };
-    }
 
     static navigationOptions = {
         title: 'Entree Item',
@@ -40,10 +40,10 @@ class MainEntreeInfo extends Component {
 
     render() {
         const entreeId = this.props.navigation.getParam('entreeId');
-        const entree = this.state.entrees.filter(entree => entree.id === entreeId)[0];
+        const entree = this.props.entrees.entrees.filter(entree => entree.id === entreeId)[0];
         return <RenderMainEntree entree={entree} />;
     }
     
 }
 
-export default MainEntreeInfo;
+export default connect(mapStateToProps)(MainEntreeInfo);

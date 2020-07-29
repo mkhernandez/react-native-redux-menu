@@ -1,17 +1,17 @@
 //This component will render the main entrees
 import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
-import { ListItem } from 'react-native-elements';
-import { ENTREES } from '../shared/mainEntrees';
+import { Tile } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+
+const mapStateToProps = state => {
+    return {
+        entrees: state.entrees
+    };
+};
 
 class Menu extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            entrees: ENTREES
-        };
-    }
 
     static navigationOptions = {
         title: 'Menu',
@@ -26,18 +26,19 @@ class Menu extends Component {
         const { navigate } = this.props.navigation;
         const renderDirectoryItem = ({item}) => {
             return(
-                <ListItem
+                <Tile
                     title={item.name}
-                    subtitle={item.description}
+                    caption={item.description}
+                    featured
                     onPress={() => navigate('EntreeInfo', {entreeId: item.id})}
-                    leftAvatar={{source: require('./images/beef-bulgogi.jpg')}}
+                    imageSrc={{uri: baseUrl + item.image}}
                 />  
             );
         };
     
         return(
             <FlatList
-                data={this.state.entrees}
+                data={this.props.entrees.entrees}
                 renderItem={renderDirectoryItem}
                 keyExtractor={item => item.id.toString()}
             />        
@@ -46,4 +47,4 @@ class Menu extends Component {
     
 }
 
-export default Menu;
+export default connect(mapStateToProps)(Menu);

@@ -6,11 +6,20 @@ import MainEntreeInfo from './MainEntreesComponent';
 import Location from './LocationComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
-import { ENTREES } from '../shared/mainEntrees';
 import { View, Platform, StyleSheet, Text, ScrollView, Image } from 'react-native';
 import { createStackNavigator, createDrawerNavigator, DrawerItems } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import SafeAreaView from 'react-native-safe-area-view';
+import { connect } from 'react-redux';
+import { fetchEntrees, fetchBibimbaps, fetchStews, fetchMiscItems, fetchSides } from '../redux/ActionCreators';
+
+const mapDispatchToProps = {
+    fetchEntrees,
+    fetchBibimbaps,
+    fetchStews,
+    fetchMiscItems,
+    fetchSides
+};
 
 const DirectoryNavigator = createStackNavigator(
     {
@@ -223,17 +232,13 @@ const MainNavigator = createDrawerNavigator(
 );
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            entrees: ENTREES,
-            selectedEntree: null
-        };
-    }
-
-    onEntreeSelect(entreeId) {
-        this.setState({selectedEntree: entreeId});
+    componentDidMount() {
+        this.props.fetchEntrees();
+        this.props.fetchBibimbaps();
+        this.props.fetchStews();
+        this.props.fetchMiscItems();
+        this.props.fetchSides();
     }
 
     render() {
@@ -281,4 +286,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Main;
+export default connect(null, mapDispatchToProps)(Main);

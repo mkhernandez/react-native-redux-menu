@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Card } from 'react-native-elements';
-import { ENTREES }  from '../shared/mainEntrees';
-import { BIBIMBAPS } from '../shared/bibimbap';
-import { STEWS } from '../shared/stews';
-import { MISCITEMS } from '../shared/miscItems';
-import { SIDES } from '../shared/sideDishes';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+
+const mapStateToProps = state => {
+    return {
+        entrees: state.entrees,
+        bibimbaps: state.bibimbaps,
+        stews: state.stews,
+        miscItems: state.miscItems,
+        sides: state.sides
+    };
+};
 
 function Info() {
 
@@ -26,7 +33,7 @@ function RenderItem({item}) {
         return(
             <Card 
                 title={item.name}
-                image={require('./images/beef-bulgogi.jpg')}>
+                image={{uri: baseUrl + item.image}}>
                 <Text style={{margin: 10}}>
                     {item.description}
                 </Text>
@@ -37,17 +44,6 @@ function RenderItem({item}) {
 }
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            entrees: ENTREES,
-            bibimbaps: BIBIMBAPS,
-            stews: STEWS,
-            miscItems: MISCITEMS,
-            sides: SIDES
-        };
-    }
 
     static navigationOptions = {
         title: 'Heart & Seoul',
@@ -63,18 +59,18 @@ class Home extends Component {
             <ScrollView>
                 <Info />
                 <RenderItem
-                    item={this.state.entrees.filter(entrees => entrees.featured)[0]} />
+                    item={this.props.entrees.entrees.filter(entrees => entrees.featured)[0]} />
                 <RenderItem
-                    item={this.state.bibimbaps.filter(bibimbaps => bibimbaps.featured)[0]} />
+                    item={this.props.bibimbaps.bibimbaps.filter(bibimbaps => bibimbaps.featured)[0]} />
                 <RenderItem
-                    item={this.state.stews.filter(stews => stews.featured)[0]} />
+                    item={this.props.stews.stews.filter(stews => stews.featured)[0]} />
                 <RenderItem
-                    item={this.state.miscItems.filter(miscItems => miscItems.featured)[0]} />
+                    item={this.props.miscItems.miscItems.filter(miscItems => miscItems.featured)[0]} />
                 <RenderItem
-                    item={this.state.sides.filter(sides => sides.featured)[0]} />
+                    item={this.props.sides.sides.filter(sides => sides.featured)[0]} />
             </ScrollView>
         );
     }
 }
 
-export default Home;
+export default connect(mapStateToProps)(Home);
