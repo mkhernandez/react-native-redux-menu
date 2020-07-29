@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import Loading from './LoadingComponent';
 
 const mapStateToProps = state => {
     return {
@@ -28,7 +29,20 @@ function Info() {
     );
 }
 
-function RenderItem({item}) {
+function RenderItem(props) {
+    const {item} = props;
+
+    if(props.isLoading) {
+        return <Loading />;
+    }
+    if(props.errMess) {
+        return(
+            <View>
+                <Text>{props.errMess}</Text>
+            </View>
+        );
+    }
+
     if(item) {
         return(
             <Card 
@@ -59,15 +73,30 @@ class Home extends Component {
             <ScrollView>
                 <Info />
                 <RenderItem
-                    item={this.props.entrees.entrees.filter(entrees => entrees.featured)[0]} />
+                    item={this.props.entrees.entrees.filter(entrees => entrees.featured)[0]}
+                    isLoading={this.props.entrees.isLoading}
+                    errMess={this.props.entrees.errMess}
+                />
                 <RenderItem
-                    item={this.props.bibimbaps.bibimbaps.filter(bibimbaps => bibimbaps.featured)[0]} />
+                    item={this.props.bibimbaps.bibimbaps.filter(bibimbaps => bibimbaps.featured)[0]}
+                    isLoading={this.props.bibimbaps.isLoading}
+                    errMess={this.props.bibimbaps.errMess}
+                />
                 <RenderItem
-                    item={this.props.stews.stews.filter(stews => stews.featured)[0]} />
+                    item={this.props.stews.stews.filter(stews => stews.featured)[0]}
+                    isLoading={this.props.stews.isLoading}
+                    errMess={this.props.stews.errMess}
+                />
                 <RenderItem
-                    item={this.props.miscItems.miscItems.filter(miscItems => miscItems.featured)[0]} />
+                    item={this.props.miscItems.miscItems.filter(miscItems => miscItems.featured)[0]}
+                    isLoading={this.props.miscItems.isLoading}
+                    errMess={this.props.miscItems.errMess}
+                />
                 <RenderItem
-                    item={this.props.sides.sides.filter(sides => sides.featured)[0]} />
+                    item={this.props.sides.sides.filter(sides => sides.featured)[0]}
+                    isLoading={this.props.sides.isLoading}
+                    errMess={this.props.sides.errMess}
+                />
             </ScrollView>
         );
     }

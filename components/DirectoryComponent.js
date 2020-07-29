@@ -1,9 +1,10 @@
 //This component will render the main entrees
 import React, { Component } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, Text } from 'react-native';
 import { Tile } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import Loading from './LoadingComponent';
 
 const mapStateToProps = state => {
     return {
@@ -35,6 +36,17 @@ class Menu extends Component {
                 />  
             );
         };
+
+        if(this.props.entrees.isLoading) {
+            return <Loading />;
+        }
+        if(this.props.entrees.errMess) {
+            return(
+                <View>
+                    <Text>{this.props.entrees.errMess}</Text>
+                </View>
+            );
+        }
     
         return(
             <FlatList
