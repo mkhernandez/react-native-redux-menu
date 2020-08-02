@@ -1,5 +1,6 @@
 import React,  { Component } from 'react';
 import { ScrollView, View } from 'react-native';
+import MapView from 'react-native-maps';
 
 class Location extends Component {
 
@@ -15,7 +16,14 @@ class Location extends Component {
     render() {
         return(
             <ScrollView>
-
+                <MapView
+                    initialRegion={{
+                        latitude: 37.78825,
+                        longitude: -122.4324,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                />
             </ScrollView>
         );
     }

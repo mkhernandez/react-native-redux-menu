@@ -7,7 +7,7 @@ import Location from './LocationComponent';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
 import { View, Platform, StyleSheet, Text, ScrollView, Image } from 'react-native';
-import { createStackNavigator, createDrawerNavigator, DrawerItems } from 'react-navigation';
+import { createStackNavigator, createDrawerNavigator, DrawerItems, NavigationContainer } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import SafeAreaView from 'react-native-safe-area-view';
 import { connect } from 'react-redux';
@@ -50,7 +50,9 @@ const DirectoryNavigator = createStackNavigator(
     }
 );
 
+
 const HomeNavigator = createStackNavigator(
+
     {
         Home: { screen: Home }
     },
@@ -72,6 +74,7 @@ const HomeNavigator = createStackNavigator(
         })
     }
 );
+
 const LocationNavigator = createStackNavigator(
     {
         Location: { screen: Location }
